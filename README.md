@@ -6,3 +6,5 @@ Este trabalho vai incluir:
   - Uma classe com todo o código de acesso à base de dados
   - Sessões e perfis de utilizadores
   - Cookies
+
+Esta versão pertence ao trabalho realizado com o Turno 2 da turma 12ºH do Curso Profissional de Gestão e Programação de Sistemas Informáticos
