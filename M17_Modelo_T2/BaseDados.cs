@@ -121,6 +121,24 @@ namespace M17_Modelo_T2
             bool erro = executaComando(sql, parametros);
             return erro;
         }
+        public bool atualizarCliente(int id,string nome, string morada, string cp, string email, DateTime data)
+        {
+            string sql = "UPDATE Cliente SET nome=@nome,morada=@morada,cp=@cp, ";
+            sql += " email=@email,data_nascimento=@data WHERE id=@id";
+            //parametros
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                new SqlParameter() {ParameterName="@nome",SqlDbType=System.Data.SqlDbType.VarChar,Value=nome },
+                new SqlParameter() {ParameterName="@morada",SqlDbType=System.Data.SqlDbType.VarChar,Value=morada },
+                new SqlParameter() {ParameterName="@cp",SqlDbType=System.Data.SqlDbType.VarChar,Value=cp },
+                new SqlParameter() {ParameterName="@email",SqlDbType=System.Data.SqlDbType.VarChar,Value=email },
+                new SqlParameter() {ParameterName="@data",SqlDbType=System.Data.SqlDbType.Date,Value=data }
+            };
+            //executar
+            bool erro = executaComando(sql, parametros);
+            return erro;
+        }
+        
         #endregion
     }
 }
