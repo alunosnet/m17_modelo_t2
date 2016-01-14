@@ -82,5 +82,47 @@ namespace M17_Modelo_T2
             GridView1.PageIndex = e.NewPageIndex;
             atualizaGrelha();
         }
+        //cancelar o editar
+        protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridView1.EditIndex = -1;
+            atualizaGrelha();
+        }
+        //clicar no link editar
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            int linha = e.NewEditIndex;
+            GridView1.EditIndex = linha;
+            atualizaGrelha();
+        }
+        //clicar no atualizar
+        protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            int linha = e.RowIndex;
+            int id = int.Parse(GridView1.Rows[linha].Cells[1].Text);
+            string nome = ((TextBox)GridView1.Rows[linha].Cells[2].Controls[0]).Text;
+            string email = ((TextBox)GridView1.Rows[linha].Cells[3].Controls[0]).Text;
+            string morada = ((TextBox)GridView1.Rows[linha].Cells[4].Controls[0]).Text;
+            string cp = ((TextBox)GridView1.Rows[linha].Cells[5].Controls[0]).Text;
+            DateTime data =DateTime.Parse(((TextBox)GridView1.Rows[linha].Cells[6].Controls[0]).Text);
+            //atualizar bd
+            bd.atualizarCliente(id,nome,morada,cp,email,data);
+            //atualizar grelha
+            GridView1.EditIndex = -1;
+            atualizaGrelha();
+        }
+
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            foreach(TableCell celula in e.Row.Cells)
+            {
+                if(celula.Text!="" && celula.Text != "&nbsp;")
+                {
+                    BoundField campo = (BoundField)((DataControlFieldCell)celula).ContainingField;
+                    if (campo.DataField == "id")
+                        campo.ReadOnly = true;
+                }
+            }
+        }
     }
 }

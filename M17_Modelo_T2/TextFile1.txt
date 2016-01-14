@@ -7,3 +7,11 @@
 	data_nascimento date,
 	primary key (id)
 );
+
+create table produto(
+	id int identity not null,
+	descricao varchar(50) not null,
+	preco decimal(10,2) not null check(preco>=0) default('0'),
+	quantidade float default('0'),
+	primary key (id)
+);

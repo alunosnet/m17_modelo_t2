@@ -132,13 +132,34 @@ namespace M17_Modelo_T2
                 new SqlParameter() {ParameterName="@morada",SqlDbType=System.Data.SqlDbType.VarChar,Value=morada },
                 new SqlParameter() {ParameterName="@cp",SqlDbType=System.Data.SqlDbType.VarChar,Value=cp },
                 new SqlParameter() {ParameterName="@email",SqlDbType=System.Data.SqlDbType.VarChar,Value=email },
-                new SqlParameter() {ParameterName="@data",SqlDbType=System.Data.SqlDbType.Date,Value=data }
+                new SqlParameter() {ParameterName="@data",SqlDbType=System.Data.SqlDbType.Date,Value=data },
+                new SqlParameter() {ParameterName="@id",SqlDbType=System.Data.SqlDbType.Int,Value=id }
             };
             //executar
             bool erro = executaComando(sql, parametros);
             return erro;
         }
-        
+        #endregion
+        #region Produto
+        //adicionar cliente
+        public int adicionarProduto(string descricao,decimal preco,float quantidade)
+        {
+            string sql = "INSERT INTO Produto(descricao,preco,quantidade) ";
+            sql += " VALUES (@descricao,@preco,@quantidade); SELECT cast(scope_identity() as int);";
+            //parametros
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                new SqlParameter() {ParameterName="@descricao",SqlDbType=System.Data.SqlDbType.VarChar,Value=descricao },
+                new SqlParameter() {ParameterName="@preco",SqlDbType=System.Data.SqlDbType.Decimal,Value=preco },
+                new SqlParameter() {ParameterName="@quantidade",SqlDbType=System.Data.SqlDbType.Float,Value=quantidade }
+            };
+            //executar
+            SqlCommand comando = new SqlCommand(sql,ligacaoBD);
+            comando.Parameters.AddRange(parametros.ToArray());
+            int id = (int)comando.ExecuteScalar();
+            comando.Dispose();
+            return id;
+        }
         #endregion
     }
 }
