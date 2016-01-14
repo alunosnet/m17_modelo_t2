@@ -1,0 +1,9 @@
+﻿create table cliente(
+	id int identity not null,
+	nome varchar(200) not null,
+	email varchar(200) not null,
+	morada varchar(200),
+	cp varchar(8),
+	data_nascimento date,
+	primary key (id)
+);
