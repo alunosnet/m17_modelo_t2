@@ -94,6 +94,7 @@
   <ItemGroup>
     <Content Include="clientes.aspx" />
     <Content Include="produtos.aspx" />
+    <Content Include="removerproduto.aspx" />
     <Content Include="TextFile1.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -114,6 +115,13 @@
       <DependentUpon>produtos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="removerproduto.aspx.cs">
+      <DependentUpon>removerproduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="removerproduto.aspx.designer.cs">
+      <DependentUpon>removerproduto.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Imagens\" />

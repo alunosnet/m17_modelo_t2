@@ -160,6 +160,19 @@ namespace M17_Modelo_T2
             comando.Dispose();
             return id;
         }
+        public bool removerProduto(int id)
+        {
+            string sql = "DELETE FROM Produto WHERE id=@id";
+
+            //parametros
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                new SqlParameter() {ParameterName="@id",SqlDbType=System.Data.SqlDbType.Int,Value=id }
+            };
+            //executar
+            bool erro = executaComando(sql, parametros);
+            return erro;
+        }
         #endregion
     }
 }
