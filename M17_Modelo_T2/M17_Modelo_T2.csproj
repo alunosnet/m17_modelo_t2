@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adicionarUtilizador.aspx" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
@@ -101,6 +102,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adicionarUtilizador.aspx.cs">
+      <DependentUpon>adicionarUtilizador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adicionarUtilizador.aspx.designer.cs">
+      <DependentUpon>adicionarUtilizador.aspx</DependentUpon>
+    </Compile>
     <Compile Include="BaseDados.cs" />
     <Compile Include="clientes.aspx.cs">
       <DependentUpon>clientes.aspx</DependentUpon>

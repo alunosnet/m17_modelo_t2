@@ -245,5 +245,19 @@ namespace M17_Modelo_T2
             return true;
         }
         #endregion
+        #region utilizador
+        public bool adicionarUtilizador(string nome,string password,int perfil)
+        {
+            string sql = "INSERT INTO utilizador(nome,palavra_passe,perfil) ";
+            sql += "VALUES (@nome,HASHBYTES('SHA1',@password),@perfil)";
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                new SqlParameter() {ParameterName="@nome",SqlDbType=SqlDbType.VarChar,Value=nome },
+                new SqlParameter() {ParameterName="@password",SqlDbType=SqlDbType.VarChar,Value=password },
+                new SqlParameter() {ParameterName="@perfil",SqlDbType=SqlDbType.Int,Value=perfil }
+            };
+            return executaComando(sql, parametros);
+        }
+        #endregion
     }
 }
