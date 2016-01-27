@@ -70,6 +70,7 @@
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="editarproduto.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
@@ -96,6 +97,7 @@
     <Content Include="produtos.aspx" />
     <Content Include="removerproduto.aspx" />
     <Content Include="TextFile1.txt" />
+    <Content Include="venda.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +108,13 @@
     </Compile>
     <Compile Include="clientes.aspx.designer.cs">
       <DependentUpon>clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="editarproduto.aspx.cs">
+      <DependentUpon>editarproduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="editarproduto.aspx.designer.cs">
+      <DependentUpon>editarproduto.aspx</DependentUpon>
     </Compile>
     <Compile Include="produtos.aspx.cs">
       <DependentUpon>produtos.aspx</DependentUpon>
@@ -121,6 +130,13 @@
     </Compile>
     <Compile Include="removerproduto.aspx.designer.cs">
       <DependentUpon>removerproduto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="venda.aspx.cs">
+      <DependentUpon>venda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="venda.aspx.designer.cs">
+      <DependentUpon>venda.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

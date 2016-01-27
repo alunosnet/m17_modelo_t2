@@ -15,3 +15,18 @@ create table produto(
 	quantidade float default('0'),
 	primary key (id)
 );
+create table venda(
+	id int identity not null,
+	id_cliente int not null foreign key references cliente(id),
+	id_produto int not null foreign key references produto(id),
+	preco_venda decimal(10,2) not null check(preco_venda>=0),
+	quantidade float not null check(quantidade>0),
+	data_venda date,
+	primary key(id)
+);
+
+create table utilizador(
+	nome varchar(40) not null primary key,
+	palavra_passe varchar(50) not null,
+	perfil int not null
+);

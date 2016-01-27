@@ -88,6 +88,23 @@ namespace M17_Modelo_T2
             }
             return true;
         }
+        public bool executaComando(string sql, List<SqlParameter> parametros,SqlTransaction transacao)
+        {
+            try
+            {
+                SqlCommand comando = new SqlCommand(sql, ligacaoBD);
+                comando.Parameters.AddRange(parametros.ToArray());
+                comando.Transaction = transacao;
+                comando.ExecuteNonQuery();
+                comando.Dispose();
+            }
+            catch (Exception erro)
+            {
+                Console.Write(erro.Message);
+                return false;
+            }
+            return true;
+        }
         #endregion
         #region Cliente
         //adicionar cliente
@@ -141,7 +158,7 @@ namespace M17_Modelo_T2
         }
         #endregion
         #region Produto
-        //adicionar cliente
+        //adicionar produto
         public int adicionarProduto(string descricao,decimal preco,float quantidade)
         {
             string sql = "INSERT INTO Produto(descricao,preco,quantidade) ";
@@ -172,6 +189,60 @@ namespace M17_Modelo_T2
             //executar
             bool erro = executaComando(sql, parametros);
             return erro;
+        }
+        public void atualizarProduto(int id,string descricao, decimal preco, float quantidade)
+        {
+            string sql = "UPDATE Produto SET descricao=@descricao, preco=@preco, ";
+            sql += " quantidade=@quantidade WHERE id=@id";
+            //parametros
+            List<SqlParameter> parametros = new List<SqlParameter>()
+            {
+                new SqlParameter() {ParameterName="@descricao",SqlDbType=System.Data.SqlDbType.VarChar,Value=descricao },
+                new SqlParameter() {ParameterName="@preco",SqlDbType=System.Data.SqlDbType.Decimal,Value=preco },
+                new SqlParameter() {ParameterName="@quantidade",SqlDbType=System.Data.SqlDbType.Float,Value=quantidade },
+                new SqlParameter() {ParameterName="@id",SqlDbType=System.Data.SqlDbType.Int,Value=id }
+            };
+            //executar
+            executaComando(sql, parametros);
+            return;
+        }
+        #endregion
+        #region venda
+       
+        public bool adicionarVenda(int idcliente,int idproduto,decimal preco,float quant, DateTime data)
+        {
+            SqlTransaction transacao = ligacaoBD.BeginTransaction();
+            try {
+                string sql = "INSERT INTO Venda(id_cliente,id_produto,preco_venda,quantidade,data_venda) ";
+                sql += " VALUES (@idcliente,@idproduto,@preco,@quantidade,@data)";
+                //parametros
+                List<SqlParameter> parametros = new List<SqlParameter>()
+                {
+                    new SqlParameter() {ParameterName="@idcliente",SqlDbType=SqlDbType.Int,Value=idcliente },
+                    new SqlParameter() {ParameterName="@idproduto",SqlDbType=SqlDbType.Int,Value=idproduto },
+                    new SqlParameter() {ParameterName="@preco",SqlDbType=SqlDbType.Decimal,Value=preco },
+                    new SqlParameter() {ParameterName="@quantidade",SqlDbType=SqlDbType.Float,Value=quant },
+                    new SqlParameter() {ParameterName="@data",SqlDbType=SqlDbType.Date,Value=data }
+                };
+                //executar
+                executaComando(sql, parametros,transacao);
+                //atualizar quantidade em stock
+                sql = "UPDATE produto SET quantidade=quantidade-@quantidade WHERE id=@id";
+                parametros.Clear();
+                parametros = new List<SqlParameter>()
+                {
+                     new SqlParameter() {ParameterName="@quantidade",SqlDbType=SqlDbType.Float,Value=quant },
+                      new SqlParameter() {ParameterName="@id",SqlDbType=SqlDbType.Int,Value=idproduto }
+                };
+                executaComando(sql, parametros, transacao);
+                transacao.Commit();
+            }
+            catch(Exception erro)
+            {
+                transacao.Rollback();
+                return false;
+            }
+            return true;
         }
         #endregion
     }

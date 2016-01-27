@@ -55,6 +55,11 @@ namespace M17_Modelo_T2
             dados.Columns.Add(cRemover);
 
             //adicionar coluna editar
+            DataColumn cEditar = new DataColumn();
+            cEditar.ColumnName = "Editar";
+            cEditar.DataType = Type.GetType("System.String");
+            dados.Columns.Add(cEditar);
+
             //associar datatable
             GridView1.DataSource = dados;
             GridView1.AutoGenerateColumns = false;
@@ -70,6 +75,13 @@ namespace M17_Modelo_T2
             GridView1.Columns.Add(lnkRemover);////////////////////////////////////
 
             //coluna editar
+            HyperLinkField lnkEditar = new HyperLinkField();
+            lnkEditar.HeaderText = "Editar";
+            lnkEditar.DataTextField = "Editar";
+            lnkEditar.Text = "Editar";
+            lnkEditar.DataNavigateUrlFormatString = "editarproduto.aspx?id={0}";
+            lnkEditar.DataNavigateUrlFields = new string[] { "id" };
+            GridView1.Columns.Add(lnkEditar);
 
             //coluna id
             BoundField bfId = new BoundField();
