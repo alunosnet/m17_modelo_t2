@@ -12,7 +12,8 @@ namespace M17_Modelo_T2
         BaseDados bd = new BaseDados();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["nome"] != null)
+                Response.Redirect("index.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -31,6 +32,7 @@ namespace M17_Modelo_T2
             Session["nome"] = utilizador.Rows[0][0].ToString();
             Session["perfil"] = utilizador.Rows[0][2].ToString();
             //redirect
+
         }
     }
 }
