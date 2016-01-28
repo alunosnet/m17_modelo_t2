@@ -13,6 +13,11 @@ namespace M17_Modelo_T2
         BaseDados bd = new BaseDados();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["nome"]==null)
+            {
+                Response.Redirect("index.aspx?erro=1");
+                return;
+            }
             if (!IsPostBack)
             {
                 tbData.Text = DateTime.Now.ToShortDateString();
@@ -23,11 +28,13 @@ namespace M17_Modelo_T2
         protected void Button1_Click(object sender, EventArgs e)
         {
             //retirar os dados do form
-            string nome = tbNome.Text;
-            string morada = tbMorada.Text;
-            string cp = tbCP.Text;
-            string email = tbEmail.Text;
-            DateTime data = DateTime.Parse(tbData.Text);
+            try {
+                string nome = Server.HtmlEncode(tbNome.Text);
+                if (nome.Length < 3) throw new Exception("O nome é muito pequeno");
+                string morada = tbMorada.Text;
+                string cp = tbCP.Text;
+                string email = tbEmail.Text;
+                DateTime data = DateTime.Parse(tbData.Text);
 
             //guardar na bd
             bd.adicionarCliente(nome, morada, cp, email, data);
@@ -39,6 +46,11 @@ namespace M17_Modelo_T2
             tbEmail.Text = "";
             tbData.Text = DateTime.Now.ToShortDateString();
             tbCP.Text = "";
+            }
+            catch (Exception erro)
+            {
+                Label1.Text = "Ocorreu o seguinte erro: " + erro.Message;
+            }
         }
 
         private void atualizaGrelha()

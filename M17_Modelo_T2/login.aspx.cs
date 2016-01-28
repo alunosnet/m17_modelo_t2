@@ -32,7 +32,7 @@ namespace M17_Modelo_T2
             Session["nome"] = utilizador.Rows[0][0].ToString();
             Session["perfil"] = utilizador.Rows[0][2].ToString();
             //redirect
-
+            Response.Redirect("index.aspx");
         }
     }
 }

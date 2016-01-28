@@ -14,6 +14,16 @@ namespace M17_Modelo_T2
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["nome"] == null)
+            {
+                Response.Redirect("index.aspx?erro=1");
+                return;
+            }
+            if (Session["perfil"].Equals("0") == false)
+            {
+                Response.Redirect("index.aspx?erro=2");
+                return;
+            }
             if (!IsPostBack)
                 atualizarGrelha();
         }

@@ -49,6 +49,13 @@
             </div>
         </nav>
     <!--Menu-->
+        <div class="jumbotron">
+            <h1>PSI - Módulo 17A</h1>
+        </div>
+        <img src="Imagens/psi3.jpg" class="img-responsive" />
+        <div runat="server" id="div_cookies">
+            Este site utiliza cookies
+        </div>
     </div>
     </form>
 </body>

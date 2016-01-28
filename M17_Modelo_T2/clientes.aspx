@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="clientes.aspx.cs" Inherits="M17_Modelo_T2.clientes" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="clientes.aspx.cs" Inherits="M17_Modelo_T2.clientes" ValidateRequest="false" %>
 
 <!DOCTYPE html>
 
@@ -8,6 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <script src="js/jquery-1.12.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/formclientes.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
